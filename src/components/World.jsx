@@ -83,6 +83,8 @@ export default function World() {
   const { scrollYProgress } = useScroll();
   const p = useSpring(scrollYProgress, { stiffness: 70, damping: 22, mass: 0.6 });
   const z = useTransform(p, [0, 1], [0, (N - 1) * D]); // camera flies forward
+  // Background gets a little deeper (same soft green family) as you move from Home to Contact
+  const bgColor = useTransform(p, [0, 0.25, 0.5, 0.75, 1], ["#FAF9F6", "#F3F3EC", "#ECEFE7", "#E4EAE2", "#DCE4DD"]);
   useMotionValueEvent(p, "change", (v) => setActive(Math.round(v * (N - 1))));
 
   // Mouse steers the camera slightly (no effect on touch screens)
@@ -103,11 +105,12 @@ export default function World() {
   return (
     <>
       <div style={{ height: `${N * (mobile ? 140 : 170)}vh` }} /> {/* gives the page its scroll length */}
-      <div
+      <motion.div
         className="fixed inset-0 overflow-hidden"
         style={{
           perspective: 1000,
-          background: "radial-gradient(60% 50% at 20% 25%, #E6EFE8 0%, transparent 70%), radial-gradient(50% 50% at 85% 75%, #E9E4F2 0%, transparent 70%), #FAF9F6",
+          backgroundImage: "radial-gradient(60% 50% at 20% 25%, #E6EFE8 0%, transparent 70%), radial-gradient(50% 50% at 85% 75%, #E9E4F2 0%, transparent 70%)",
+          backgroundColor: bgColor,
         }}
         onPointerMove={onMove}
       >
@@ -170,7 +173,7 @@ export default function World() {
             </div>
           </>
         )}
-      </div>
+      </motion.div>
     </>
   );
 }

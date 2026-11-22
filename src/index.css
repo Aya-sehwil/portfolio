@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { @apply bg-ivory text-ink font-sans antialiased; }
+:focus-visible { outline: 2px solid #8FA595; outline-offset: 3px; }
+
+/* Glass card used across the site */
+.glass { @apply bg-white/60 backdrop-blur-md border border-line rounded-3xl shadow-soft; }
+.btn { @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition; }
+.btn-primary { @apply bg-ink text-ivory hover:bg-ink/85; }
+.btn-ghost { @apply border border-line bg-white/50 hover:bg-white; }
+.tag { @apply rounded-full bg-sand px-3 py-1 text-xs font-medium text-slate; }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
